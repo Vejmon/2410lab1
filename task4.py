@@ -26,9 +26,9 @@ with open('andreTall') as tekstFil:
 
             #konverterer tallverdier som ikke er gitt som Mbps
             if enEnhet[0] == 'K':
-                etTall = etTall / 1024
+                etTall = etTall / 1000
             elif enEnhet[0] == 'G':
-                etTall = etTall * 1024
+                etTall = etTall * 1000
 
             tall.append(etTall)
         except:
