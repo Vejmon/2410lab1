@@ -6,23 +6,32 @@ with open('andreTall') as tekstFil:
     #lager to lister, den ene skal holde verdien per linje, den andre enheten til verdien.
     tall = []
     enhet = []
-    for line in tekstFil:
-        tall.append(line.split()[0])
-        enhet.append(line.split()[1])
+
     #looper igjennom listen, og gir tallverdien riktig mengde utifra enheten.
+    for line in tekstFil:
+        try:
+            tall.append(line.split()[0])
+            enhet.append(line.split()[1])
+        except:
+            print('listen må ha dette oppsettet')
+            print('eksempel')
+            print('32 Gbps')
+    #oppretter en teller for å hente riktig linje.
     teller = 0
     for i in tall:
         #hvis textfilen ikke er i riktig format printes feilmeldingen med noen instruksjoner.
         try:
             i = float(i)
+
+            #konverterer tallverdier som ikke er gitt som Mbps
+            if enhet[teller][0] == 'K':
+                i = i / 1024
+            elif enhet[teller][0] == 'G':
+                i = i * 1024
         except:
             print('listen må ha dette oppsettet')
-            print('tall enhet')
+            print('eksempel')
             print('32 Gbps')
-        #konverterer tallverdier som ikke er gitt som Mbps
-        if enhet[teller][0] == 'K':
-            i = i / 1024
-        elif enhet[teller][0] == 'G':
-            i = i * 1024
+
     #sender listen til jainsall fra task2
     print(jainsall(tall))
